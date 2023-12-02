@@ -8,7 +8,7 @@ public partial class Program
     {
         var sum1 = 0;
         var sum2 = 0;
-        using (var file = File.OpenText("D:\\AoC\\InputFiles\\Day1.txt"))
+        using (var file = File.OpenText("D:\\AoC2023\\InputFiles\\Day1.txt"))
         {
             while (!file.EndOfStream)
             {
@@ -33,9 +33,8 @@ public partial class Program
         {
             throw new Exception("No digit in line found");
         }
-        var orderedMatches = matches.OrderBy(m => m.Index);
-        var firstDigit = int.Parse(orderedMatches.First().Value);
-        var secondDigit = int.Parse(orderedMatches.Last().Value);
+        var firstDigit = int.Parse(matches.First().Value);
+        var secondDigit = int.Parse(matches.Last().Value);
         return firstDigit * 10 + secondDigit;
     }
 
