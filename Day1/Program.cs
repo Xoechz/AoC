@@ -4,6 +4,8 @@ namespace AoC2023.Day1;
 
 public partial class Program
 {
+    #region Public Methods
+
     public static async Task Main(string[] args)
     {
         var sum1 = 0;
@@ -26,17 +28,9 @@ public partial class Program
         Console.WriteLine(sum2);
     }
 
-    private static int GetEncodedNumber(string input)
-    {
-        var matches = DigitRegex().Matches(input);
-        if (matches.Count == 0)
-        {
-            throw new Exception("No digit in line found");
-        }
-        var firstDigit = int.Parse(matches.First().Value);
-        var secondDigit = int.Parse(matches.Last().Value);
-        return firstDigit * 10 + secondDigit;
-    }
+    #endregion Public Methods
+
+    #region Private Methods
 
     private static string ConvertNumbers(string input) =>
         input.Replace("one", "one1one")
@@ -51,4 +45,18 @@ public partial class Program
 
     [GeneratedRegex("[0-9]")]
     private static partial Regex DigitRegex();
+
+    private static int GetEncodedNumber(string input)
+    {
+        var matches = DigitRegex().Matches(input);
+        if (matches.Count == 0)
+        {
+            throw new Exception("No digit in line found");
+        }
+        var firstDigit = int.Parse(matches.First().Value);
+        var secondDigit = int.Parse(matches.Last().Value);
+        return firstDigit * 10 + secondDigit;
+    }
+
+    #endregion Private Methods
 }

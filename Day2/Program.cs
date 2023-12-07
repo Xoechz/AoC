@@ -5,9 +5,7 @@ namespace AoC2023.Day2;
 
 public partial class Program
 {
-    private const int MAX_RED = 12;
-    private const int MAX_GREEN = 13;
-    private const int MAX_BLUE = 14;
+    #region Public Methods
 
     public static async Task Main(string[] args)
     {
@@ -39,8 +37,17 @@ public partial class Program
         Console.WriteLine(sum2);
     }
 
-    private static bool IsGamePossible(Game game, IReadOnlyDictionary<Color, int> maxDict)
-        => !game.Sets.Any(s => s.Counts.Any(c => c.Value > maxDict.GetValueOrDefault(c.Key)));
+    #endregion Public Methods
+
+    #region Private Fields
+
+    private const int MAX_BLUE = 14;
+    private const int MAX_GREEN = 13;
+    private const int MAX_RED = 12;
+
+    #endregion Private Fields
+
+    #region Private Methods
 
     private static int GetGamePower(Game game)
     {
@@ -51,6 +58,9 @@ public partial class Program
         }
         return power;
     }
+
+    private static bool IsGamePossible(Game game, IReadOnlyDictionary<Color, int> maxDict)
+            => !game.Sets.Any(s => s.Counts.Any(c => c.Value > maxDict.GetValueOrDefault(c.Key)));
 
     private static Game MapToGame(string inputString)
     {
@@ -98,4 +108,6 @@ public partial class Program
 
         return new Set { Counts = dict };
     }
+
+    #endregion Private Methods
 }

@@ -4,6 +4,8 @@ namespace AoC2023.Day5;
 
 public partial class Program
 {
+    #region Public Methods
+
     public static async Task Main(string[] args)
     {
         long min1 = 0;
@@ -78,6 +80,10 @@ public partial class Program
         Console.WriteLine(min2);
     }
 
+    #endregion Public Methods
+
+    #region Private Methods
+
     private static long ApplyMap(List<Map> maps, long input)
     {
         var map = maps.Find(m => m.Source <= input
@@ -110,18 +116,6 @@ public partial class Program
                 seedRange.Start = seedRange.Start - map.Source + map.Destination;
                 result.Add(seedRange);
             }
-        }
-
-        return result;
-    }
-
-    private static List<SeedRange> SplitSeedRangeList(List<Map> maps, List<SeedRange> seedRanges)
-    {
-        List<SeedRange> result = [];
-
-        foreach (var seedRange in seedRanges)
-        {
-            result.AddRange(SplitSeedRange(maps, seedRange));
         }
 
         return result;
@@ -175,4 +169,18 @@ public partial class Program
 
         return result;
     }
+
+    private static List<SeedRange> SplitSeedRangeList(List<Map> maps, List<SeedRange> seedRanges)
+    {
+        List<SeedRange> result = [];
+
+        foreach (var seedRange in seedRanges)
+        {
+            result.AddRange(SplitSeedRange(maps, seedRange));
+        }
+
+        return result;
+    }
+
+    #endregion Private Methods
 }

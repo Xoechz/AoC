@@ -2,6 +2,8 @@
 
 public partial class Program
 {
+    #region Public Methods
+
     public static async Task Main(string[] args)
     {
         var prod1 = 1;
@@ -56,4 +58,6 @@ public partial class Program
         Console.WriteLine("Task 2:");
         Console.WriteLine(counter2);
     }
+
+    #endregion Public Methods
 }

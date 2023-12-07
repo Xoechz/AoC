@@ -4,6 +4,8 @@ namespace AoC2023.Day3;
 
 public partial class Program
 {
+    #region Public Methods
+
     public static async Task Main(string[] args)
     {
         var sum1 = 0;
@@ -64,9 +66,15 @@ public partial class Program
         Console.WriteLine(sum2);
     }
 
+    #endregion Public Methods
+
+    #region Private Methods
+
     [GeneratedRegex("[0-9]+")]
     private static partial Regex Number();
 
     [GeneratedRegex("[^0-9.]")]
     private static partial Regex Symbol();
+
+    #endregion Private Methods
 }

@@ -2,6 +2,10 @@
 
 public class Game
 {
+    #region Public Properties
+
     public required int Id { get; set; }
     public required IEnumerable<Set> Sets { get; set; }
+
+    #endregion Public Properties
 }

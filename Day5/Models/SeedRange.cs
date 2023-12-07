@@ -2,7 +2,11 @@
 {
     public class SeedRange
     {
-        public long Start { get; set; }
+        #region Public Properties
+
         public long Range { get; set; }
+        public long Start { get; set; }
+
+        #endregion Public Properties
     }
 }

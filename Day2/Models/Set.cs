@@ -2,5 +2,9 @@
 
 public class Set
 {
+    #region Public Properties
+
     public required IDictionary<Color, int> Counts { get; set; }
+
+    #endregion Public Properties
 }

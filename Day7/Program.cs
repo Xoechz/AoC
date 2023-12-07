@@ -4,39 +4,7 @@ namespace AoC2023.Day7;
 
 public partial class Program
 {
-    private static readonly ReadOnlyDictionary<char, int?> CardValues = new(new Dictionary<char, int?>
-    {
-        { '2', 0 },
-        { '3', 1 },
-        { '4', 2 },
-        { '5', 3 },
-        { '6', 4 },
-        { '7', 5 },
-        { '8', 6 },
-        { '9', 7 },
-        { 'T', 8 },
-        { 'J', 9 },
-        { 'Q', 10 },
-        { 'K', 11 },
-        { 'A', 12 },
-    });
-
-    private static readonly ReadOnlyDictionary<char, int?> CardValuesWithJokers = new(new Dictionary<char, int?>
-    {
-        { 'J', 0 },
-        { '2', 1 },
-        { '3', 2 },
-        { '4', 3 },
-        { '5', 4 },
-        { '6', 5 },
-        { '7', 6 },
-        { '8', 7 },
-        { '9', 8 },
-        { 'T', 9 },
-        { 'Q', 10 },
-        { 'K', 11 },
-        { 'A', 12 },
-    });
+    #region Public Methods
 
     public static async Task Main(string[] args)
     {
@@ -87,6 +55,86 @@ public partial class Program
         Console.WriteLine("Task 2:");
         Console.WriteLine(sum2);
     }
+
+    #endregion Public Methods
+
+    #region Private Fields
+
+    private static readonly ReadOnlyDictionary<char, int?> CardValues = new(new Dictionary<char, int?>
+    {
+        { '2', 0 },
+        { '3', 1 },
+        { '4', 2 },
+        { '5', 3 },
+        { '6', 4 },
+        { '7', 5 },
+        { '8', 6 },
+        { '9', 7 },
+        { 'T', 8 },
+        { 'J', 9 },
+        { 'Q', 10 },
+        { 'K', 11 },
+        { 'A', 12 },
+    });
+
+    private static readonly ReadOnlyDictionary<char, int?> CardValuesWithJokers = new(new Dictionary<char, int?>
+    {
+        { 'J', 0 },
+        { '2', 1 },
+        { '3', 2 },
+        { '4', 3 },
+        { '5', 4 },
+        { '6', 5 },
+        { '7', 6 },
+        { '8', 7 },
+        { '9', 8 },
+        { 'T', 9 },
+        { 'Q', 10 },
+        { 'K', 11 },
+        { 'A', 12 },
+    });
+
+    #endregion Private Fields
+
+    #region Private Methods
+
+    private static bool CheckFullHouseWithJokers(Dictionary<char, int> cardCounts, int jokers)
+    {
+        //sort out higher scoring types
+        if (cardCounts.Any(c => c.Value >= 4 - jokers))
+        {
+            return false;
+        }
+
+        var tripletsWithJoker = cardCounts.Where(c => c.Value >= 3 - jokers);
+        if (!tripletsWithJoker.Any())
+        {
+            return false;
+        }
+        var triplet = tripletsWithJoker.First();
+
+        return cardCounts.Any(c => c.Value == 2 && c.Key != triplet.Key);
+    }
+
+    private static Dictionary<char, int> GetCardCounts(string cards)
+    {
+        Dictionary<char, int> result = [];
+
+        foreach (var cardChar in CardValues.Keys)
+        {
+            result.Add(cardChar, cards.Count(c => c == cardChar));
+        }
+
+        return result;
+    }
+
+    private static int GetCardValue(char card) =>
+        CardValues.GetValueOrDefault(card)
+            ?? throw new Exception("Invalid card");
+
+    private static int GetCardValueWithJokers(char card) =>
+        CardValuesWithJokers.GetValueOrDefault(card)
+            ?? throw new Exception("Invalid card");
 
     private static int GetHandValue(string cards)
     {
@@ -187,41 +235,5 @@ public partial class Program
         return value;
     }
 
-    private static bool CheckFullHouseWithJokers(Dictionary<char, int> cardCounts, int jokers)
-    {
-        //sort out higher scoring types
-        if (cardCounts.Any(c => c.Value >= 4 - jokers))
-        {
-            return false;
-        }
-
-        var tripletsWithJoker = cardCounts.Where(c => c.Value >= 3 - jokers);
-        if (!tripletsWithJoker.Any())
-        {
-            return false;
-        }
-        var triplet = tripletsWithJoker.First();
-
-        return cardCounts.Any(c => c.Value == 2 && c.Key != triplet.Key);
-    }
-
-    private static int GetCardValue(char card) =>
-        CardValues.GetValueOrDefault(card)
-            ?? throw new Exception("Invalid card");
-
-    private static int GetCardValueWithJokers(char card) =>
-        CardValuesWithJokers.GetValueOrDefault(card)
-            ?? throw new Exception("Invalid card");
-
-    private static Dictionary<char, int> GetCardCounts(string cards)
-    {
-        Dictionary<char, int> result = [];
-
-        foreach (var cardChar in CardValues.Keys)
-        {
-            result.Add(cardChar, cards.Count(c => c == cardChar));
-        }
-
-        return result;
-    }
+    #endregion Private Methods
 }
