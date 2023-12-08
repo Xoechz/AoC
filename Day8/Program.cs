@@ -55,7 +55,7 @@ public partial class Program
         Console.WriteLine(steps1);
 
         List<long> loops = [];
-        var currentNodes = nodes.Where(n => n.Id.EndsWith('A')).ToList();
+        var currentNodes = nodes.Where(n => n.Id.EndsWith('A'));
         foreach (var node in currentNodes)
         {
             bool loopFound = false;
