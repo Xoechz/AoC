@@ -5,6 +5,7 @@ namespace AoC2023.Day10;
 public partial class Program
 {
     #region Public Methods
+
     // THIS IS SHIT; DO NOT DO IT THIS WAY
     public static async Task Main(string[] args)
     {
