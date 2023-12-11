@@ -156,7 +156,44 @@ public partial class Program
         {
             foreach (char c in line)
             {
-                Console.Write(c);
+                if (c == '1')
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write('X');
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (c == '2' || c == ' ')
+                {
+                    Console.Write(' ');
+                }
+                else if (c == 'L')
+                {
+                    Console.Write('╚');
+                }
+                else if (c == '7')
+                {
+                    Console.Write('╗');
+                }
+                else if (c == 'F')
+                {
+                    Console.Write('╔');
+                }
+                else if (c == 'J')
+                {
+                    Console.Write('╝');
+                }
+                else if (c == '-')
+                {
+                    Console.Write('=');
+                }
+                else if (c == '|')
+                {
+                    Console.Write('║');
+                }
+                else
+                {
+                    Console.Write(c);
+                }
             }
             Console.WriteLine();
         }
